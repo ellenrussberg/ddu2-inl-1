@@ -1,0 +1,9 @@
+@font-face {
+  font-family: "BC-Bold";
+  src: url(../fonts/BarlowCondensed-Bold.ttf);
+}
+
+@font-face {
+  font-family: "BC-Light";
+  src: url(../fonts/BarlowCondensed-Light.ttf);
+}

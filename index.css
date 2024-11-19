@@ -1,0 +1,93 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: BC-Light;
+}
+
+body {
+  background-color: skyblue;
+  margin: 20px;
+}
+
+#cities {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+#cities .cityBox {
+  padding: 3px 6px;
+  background-color: lightgrey;
+  border-radius: 5px;
+}
+
+#cities .target, #cities .closest, #cities .furthest { color: white }
+#cities .target { background-color: black; }
+#cities .closest { background-color: green;}
+#cities .furthest { background-color: blue; }
+
+h1 {
+  text-align: center;
+  margin: 20px 0;
+}
+
+h2, h3, p {
+  text-align: center;
+}
+
+#links {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px
+}
+
+#links a {
+  padding: 5px 10px;
+  text-decoration: none;
+  color: black;
+  flex-basis: 200px;
+  background-color: lightgrey;
+  border-radius: 5px;
+  text-align: center;
+}
+
+main {
+  width: 90%;
+  min-width: 900px;
+  max-width: 1300px;
+  margin: auto;
+  background-color: aliceblue;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+#table {
+  --fsz: .8rem;
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 80px repeat(39, 1fr);
+}
+
+#table .cell {
+  padding: 1px 0 2px 0;
+  font-size: var(--fsz);
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+  text-align: center;
+}
+
+#table .head_row, #table .head_column {
+  font-size: var(--fsz);
+  font-weight: bold;
+}
+
+#table .even_row {
+  border-bottom: 2px solid black;
+  /* background-color: #eee; */
+}
+
+#table .even_col {
+  background-color: #ddd;
+}
