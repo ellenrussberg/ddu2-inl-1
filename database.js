@@ -3750,3 +3750,98 @@ const distances = [
 ];
 
 
+
+
+
+// Användare fyller i staden
+window.onload = function() {
+  let cityInput = prompt("Ange en stad:");
+  let cityData = getCityData(cityInput);
+
+  if (cityData) {
+    let cityName = cityData.name;
+    let cityCountry = cityData.country;
+    document.querySelector('h2').textContent = `${cityName}, ${cityCountry}`;
+    
+    let distancesInfo = calculateDistances(cityData);
+    let closest = distancesInfo.closest;
+    let furthest = distancesInfo.furthest;
+    
+    highlightCities(cityName, closest, furthest);
+  } else {
+    alert("Staden finns inte i databasen.");
+  }
+};
+
+// Hämta stadens data
+function getCityData(cityName) {
+  return cities.find(city => city.name.toLowerCase() === cityName.toLowerCase()) || null;
+}
+
+// Beräkna närmaste och längst bort städer med hjälp av avståndsdata
+function calculateDistances(cityData) {
+  let closestDistance = Infinity;
+  let furthestDistance = -Infinity;
+  let closestCity = null;
+  let furthestCity = null;
+
+  distances.forEach(dist => {
+    let otherCityId = null;
+
+    if (dist.city1 === cityData.id) {
+      otherCityId = dist.city2;
+    } else if (dist.city2 === cityData.id) {
+      otherCityId = dist.city1;
+    }
+
+    if (otherCityId !== null) {
+      let otherCity = cities.find(city => city.id === otherCityId);
+
+      if (otherCity) {
+        console.log(`Checking distance between ${cityData.name} and ${otherCity.name}: ${dist.distance} mil`);
+
+        if (dist.distance < closestDistance) {
+          closestDistance = dist.distance;
+          closestCity = otherCity;
+        }
+        if (dist.distance > furthestDistance) {
+          furthestDistance = dist.distance;
+          furthestCity = otherCity;
+        }
+      }
+    }
+  });
+
+  console.log(`Closest city to ${cityData.name}: ${closestCity?.name} (${closestDistance} mil)`);
+  console.log(`Furthest city from ${cityData.name}: ${furthestCity?.name} (${furthestDistance} mil)`);
+
+  return {
+    closest: closestCity ? { name: closestCity.name, distance: closestDistance } : null,
+    furthest: furthestCity ? { name: furthestCity.name, distance: furthestDistance } : null
+  };
+}
+
+
+
+// Markera städerna med färger och avstånd
+function highlightCities(cityName, closest, furthest) {
+  let cities = document.querySelectorAll('.cityBox');
+
+  cities.forEach(cityBox => {
+    cityBox.classList.remove('target', 'closest', 'furthest');
+    cityBox.textContent = cityBox.textContent.split(' (')[0]; // Ta bort tidigare avstånd om det finns
+
+    if (cityBox.textContent === cityName) {
+      cityBox.classList.add('target');
+    } else if (closest && cityBox.textContent === closest.name) {
+      cityBox.classList.add('closest');
+      cityBox.textContent += ` ligger ${closest.distance} mil bort`;
+    } else if (furthest && cityBox.textContent === furthest.name) {
+      cityBox.classList.add('furthest');
+      cityBox.textContent += ` ligger ${furthest.distance} mil bort`;
+    }
+  });
+}
+
+
+
