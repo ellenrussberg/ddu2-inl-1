@@ -3753,7 +3753,7 @@ const distances = [
 
 
 
-// Användare fyller i staden
+// användare fyller i stad
 window.onload = function() {
   let cityInput = prompt("Ange en stad:");
   let cityData = getCityData(cityInput);
@@ -3761,24 +3761,33 @@ window.onload = function() {
   if (cityData) {
     let cityName = cityData.name;
     let cityCountry = cityData.country;
-    document.querySelector('h2').textContent = `${cityName}, ${cityCountry}`;
+
+    // gör om sidans titel till den inskrivna staden
+    document.title = `${cityName}`;
+
+    document.querySelector('h2').textContent = `${cityName} (${cityCountry})`;
     
     let distancesInfo = calculateDistances(cityData);
     let closest = distancesInfo.closest;
     let furthest = distancesInfo.furthest;
     
+    // om ifylld stad inte finns
     highlightCities(cityName, closest, furthest);
   } else {
+    document.title = "Not Found";
+    document.querySelector('h3').textContent = `${cityInput} finns inte i databasen`;
+    
     alert("Staden finns inte i databasen.");
   }
 };
 
-// Hämta stadens data
+
+// hämta stads data
 function getCityData(cityName) {
   return cities.find(city => city.name.toLowerCase() === cityName.toLowerCase()) || null;
 }
 
-// Beräkna närmaste och längst bort städer med hjälp av avståndsdata
+//beräkn närmast o lägnst bort stad 
 function calculateDistances(cityData) {
   let closestDistance = Infinity;
   let furthestDistance = -Infinity;
@@ -3823,24 +3832,44 @@ function calculateDistances(cityData) {
 
 
 
-// Markera städerna med färger och avstånd
+//färger o avstånd städer
 function highlightCities(cityName, closest, furthest) {
   let cities = document.querySelectorAll('.cityBox');
 
   cities.forEach(cityBox => {
     cityBox.classList.remove('target', 'closest', 'furthest');
-    cityBox.textContent = cityBox.textContent.split(' (')[0]; // Ta bort tidigare avstånd om det finns
+    cityBox.textContent = cityBox.textContent.split(' (')[0]; // tar bort tidigare avstånd om det finns
 
     if (cityBox.textContent === cityName) {
       cityBox.classList.add('target');
     } else if (closest && cityBox.textContent === closest.name) {
       cityBox.classList.add('closest');
-      cityBox.textContent += ` ligger ${closest.distance} mil bort`;
+      //gör om avståndet från km till mil
+      
+      let distanceInMil = (closest.distance / 10);
+      cityBox.textContent += ` ligger ${distanceInMil} mil bort`;
     } else if (furthest && cityBox.textContent === furthest.name) {
       cityBox.classList.add('furthest');
-      cityBox.textContent += ` ligger ${furthest.distance} mil bort`;
+      let distanceInMil = (furthest.distance / 10); 
+      cityBox.textContent += ` ligger ${distanceInMil} mil bort`;
     }
   });
+
+    //lägger i närmast o längst bort stad i h3
+    let closestSpan = document.getElementById('closest');
+    let furthestSpan = document.getElementById('furthest');
+  
+    if (closest) {
+      closestSpan.textContent = `${closest.name}`;
+    } else {
+      closestSpan.textContent = "Ingen data";
+    }
+  
+    if (furthest) {
+      furthestSpan.textContent = `${furthest.name}`;
+    } else {
+      furthestSpan.textContent = "Ingen data";
+    }
 }
 
 
