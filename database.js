@@ -3872,5 +3872,71 @@ function highlightCities(cityName, closest, furthest) {
     }
 }
 
+// Funktion för att hämta avstånd mellan två städer
+function getDistance(city1, city2) {
+  if (city1 === city2) return ""; //tom cell för diagonalen
+  const pair = distances.find(
+    (d) =>
+      (d.city1 === city1 && d.city2 === city2) ||
+      (d.city1 === city2 && d.city2 === city1)
+  );
+  return pair ? (pair.distance / 10):"-" //dividera me 10 o 1 decimal
+}
 
 
+
+
+// Funktion för att hämta avstånd mellan två städer
+function getDistance(city1, city2) {
+  if (city1 === city2) return ""; // Tom cell för diagonalen
+  const pair = distances.find(
+    (d) =>
+      (d.city1 === city1 && d.city2 === city2) ||
+      (d.city1 === city2 && d.city2 === city1)
+  );
+  return pair ? (pair.distance / 10) : "-"; // Dividera med 10 och format till 1 decimal
+}
+
+// Funktion för att skapa tabellen
+function createTable() {
+  const table = document.getElementById("myTable");
+
+  // Skapa första raden (rubriker med ID:n)
+  const headerRow = document.createElement("tr");
+  headerRow.classList.add("head_row");
+  const emptyCell = document.createElement("th");
+  headerRow.appendChild(emptyCell); // Tom cell längst upp till vänster
+
+  cities.forEach((city) => {
+    const th = document.createElement("th");
+    th.innerText = city.id;
+    headerRow.appendChild(th);
+  });
+  table.appendChild(headerRow);
+
+  // Skapa övriga rader
+  cities.forEach((city1, rowIndex) => {
+    const row = document.createElement("tr");
+    row.classList.add(rowIndex % 2 === 0 ? "even_row" : "odd_row");
+
+    // Första kolumnen: stadens namn
+    const cityCell = document.createElement("th");
+    cityCell.classList.add("head_column");
+    cityCell.innerText = `${city1.name}`;
+    row.appendChild(cityCell);
+
+    // Fyll cellerna med avstånd
+    cities.forEach((city2, colIndex) => {
+      const cell = document.createElement("td");
+      cell.classList.add(colIndex % 2 === 0 ? "even_col" : "odd_col");
+      const distance = getDistance(city1.id, city2.id);
+      cell.innerText = distance || ""; // Visa tomt om `distance` är ""
+      row.appendChild(cell);
+    });
+
+    table.appendChild(row);
+  });
+}
+
+// Kör funktionen för att skapa tabellen
+createTable();
