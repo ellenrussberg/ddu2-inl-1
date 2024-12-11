@@ -63,14 +63,18 @@ main {
   padding: 20px;
 }
 
-#table {
+#myTable {
   --fsz: .8rem;
   margin-top: 20px;
   display: grid;
   grid-template-columns: 80px repeat(39, 1fr);
 }
 
-#table .cell {
+#myTable .row {
+  display: contents; /*behåller grid-layouten*/
+}
+
+#myTable .cell {
   padding: 1px 0 2px 0;
   font-size: var(--fsz);
   border-right: 1px solid black;
@@ -78,16 +82,16 @@ main {
   text-align: center;
 }
 
-#table .head_row, #table .head_column {
+#myTable .head_row, #myTable .head_column {
   font-size: var(--fsz);
   font-weight: bold;
 }
 
-#table .even_row {
+#myTable .even_row {
   border-bottom: 2px solid black;
   /* background-color: #eee; */
 }
 
-#table .even_col {
+#myTable .even_col {
   background-color: #ddd;
 }

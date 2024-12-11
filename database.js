@@ -3897,40 +3897,42 @@ function getDistance(city1, city2) {
   return pair ? (pair.distance / 10) : "-"; // Dividera med 10 och format till 1 decimal
 }
 
-// Funktion för att skapa tabellen
 function createTable() {
   const table = document.getElementById("myTable");
 
-  // Skapa första raden (rubriker med ID:n)
-  const headerRow = document.createElement("tr");
-  headerRow.classList.add("head_row");
-  const emptyCell = document.createElement("th");
-  headerRow.appendChild(emptyCell); // Tom cell längst upp till vänster
+  // Skapa rubrikraden
+  const headerRow = document.createElement("div");
+  headerRow.classList.add("row", "head_row");
+  const emptyCell = document.createElement("div");
+  emptyCell.classList.add("cell", "head_column");
+  headerRow.appendChild(emptyCell);
 
   cities.forEach((city) => {
-    const th = document.createElement("th");
+    const th = document.createElement("div");
+    th.classList.add("cell", "head_column");
     th.innerText = city.id;
     headerRow.appendChild(th);
   });
+
   table.appendChild(headerRow);
 
   // Skapa övriga rader
   cities.forEach((city1, rowIndex) => {
-    const row = document.createElement("tr");
-    row.classList.add(rowIndex % 2 === 0 ? "even_row" : "odd_row");
+    const row = document.createElement("div");
+    row.classList.add("row", rowIndex % 2 === 0 ? "even_row" : "odd_row");
 
-    // Första kolumnen: stadens namn
-    const cityCell = document.createElement("th");
-    cityCell.classList.add("head_column");
-    cityCell.innerText = `${city1.name}`;
+    // Första kolumnen
+    const cityCell = document.createElement("div");
+    cityCell.classList.add("cell", "head_column");
+    cityCell.innerText = `${city1.id}-${city1.name}`;
     row.appendChild(cityCell);
 
-    // Fyll cellerna med avstånd
+    // Skapa övriga celler
     cities.forEach((city2, colIndex) => {
-      const cell = document.createElement("td");
-      cell.classList.add(colIndex % 2 === 0 ? "even_col" : "odd_col");
+      const cell = document.createElement("div");
+      cell.classList.add("cell", colIndex % 2 === 0 ? "even_col" : "odd_col");
       const distance = getDistance(city1.id, city2.id);
-      cell.innerText = distance || ""; // Visa tomt om `distance` är ""
+      cell.innerText = distance || ""; // Visa tomt om det är diagonalen
       row.appendChild(cell);
     });
 
@@ -3938,5 +3940,8 @@ function createTable() {
   });
 }
 
+
 // Kör funktionen för att skapa tabellen
 createTable();
+
+
