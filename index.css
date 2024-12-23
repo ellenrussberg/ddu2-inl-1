@@ -6,7 +6,7 @@
 }
 
 body {
-  background-color: skyblue;
+  background-color: #e4b9fa;
   margin: 20px;
 }
 
@@ -58,7 +58,7 @@ main {
   min-width: 900px;
   max-width: 1300px;
   margin: auto;
-  background-color: aliceblue;
+  background-color: #eedcf7;
   border-radius: 20px;
   padding: 20px;
 }
@@ -93,5 +93,5 @@ main {
 }
 
 #myTable .even_col {
-  background-color: #ddd;
+  background-color: #e6befa;
 }
