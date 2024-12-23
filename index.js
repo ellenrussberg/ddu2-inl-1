@@ -1,4 +1,3 @@
-// användare fyller i stad
 window.onload = function() {
     let cityInput = prompt("Ange en stad:");
     let cityData = getCityData(cityInput);
@@ -7,7 +6,6 @@ window.onload = function() {
       let cityName = cityData.name;
       let cityCountry = cityData.country;
   
-      // gör om sidans titel till den inskrivna staden
       document.title = `${cityName}`;
   
       document.querySelector('h2').textContent = `${cityName} (${cityCountry})`;
@@ -16,7 +14,6 @@ window.onload = function() {
       let closest = distancesInfo.closest;
       let furthest = distancesInfo.furthest;
       
-      // om ifylld stad inte finns
       highlightCities(cityName, closest, furthest);
     } else {
       document.title = "Not Found";
@@ -26,13 +23,11 @@ window.onload = function() {
     }
   };
   
-  
-  // hämta stadsdata
+
   function getCityData(cityName) {
     return cities.find(city => city.name.toLowerCase() === cityName.toLowerCase()) || null;
   }
   
-  //beräkn närmast o lägnst bort stad 
   function calculateDistances(cityData) {
     let closestDistance = Infinity;
     let furthestDistance = -Infinity;
@@ -77,19 +72,17 @@ window.onload = function() {
   
   
   
-  //färger o avstånd städer
   function highlightCities(cityName, closest, furthest) {
     let cities = document.querySelectorAll('.cityBox');
   
     cities.forEach(cityBox => {
       cityBox.classList.remove('target', 'closest', 'furthest');
-      cityBox.textContent = cityBox.textContent.split(' (')[0]; // tar bort tidigare avstånd om det finns
+      cityBox.textContent = cityBox.textContent.split(' (')[0];
   
       if (cityBox.textContent === cityName) {
         cityBox.classList.add('target');
       } else if (closest && cityBox.textContent === closest.name) {
         cityBox.classList.add('closest');
-        //gör om avståndet från km till mil
         
         let distanceInMil = (closest.distance / 10);
         cityBox.textContent += ` ligger ${distanceInMil} mil bort`;
@@ -100,7 +93,6 @@ window.onload = function() {
       }
     });
   
-      //lägger i närmast o längst bort stad i h3
       let closestSpan = document.getElementById('closest');
       let furthestSpan = document.getElementById('furthest');
     
@@ -117,35 +109,32 @@ window.onload = function() {
       }
   }
   
-  // Funktion för att hämta avstånd mellan två städer
   function getDistance(city1, city2) {
-    if (city1 === city2) return ""; //tom cell för diagonalen
+    if (city1 === city2) return "";
     const pair = distances.find(
       (d) =>
         (d.city1 === city1 && d.city2 === city2) ||
         (d.city1 === city2 && d.city2 === city1)
     );
-    return pair ? (pair.distance / 10):"-" //dividera me 10 o 1 decimal
+    return pair ? (pair.distance / 10):"-"
   }
   
   
   
   
-  // Funktion för att hämta avstånd mellan två städer
   function getDistance(city1, city2) {
-    if (city1 === city2) return ""; // Tom cell för diagonalen
+    if (city1 === city2) return "";
     const pair = distances.find(
       (d) =>
         (d.city1 === city1 && d.city2 === city2) ||
         (d.city1 === city2 && d.city2 === city1)
     );
-    return pair ? (pair.distance / 10) : "-"; // Dividera med 10 och format till 1 decimal
+    return pair ? (pair.distance / 10) : "-";
   }
   
   function createTable() {
     const table = document.getElementById("myTable");
   
-    // Skapa rubrikraden
     const headerRow = document.createElement("div");
     headerRow.classList.add("row", "head_row");
     const emptyCell = document.createElement("div");
@@ -161,23 +150,20 @@ window.onload = function() {
   
     table.appendChild(headerRow);
   
-    // Skapa övriga rader
     cities.forEach((city1, rowIndex) => {
       const row = document.createElement("div");
       row.classList.add("row", rowIndex % 2 === 0 ? "even_row" : "odd_row");
   
-      // Första kolumnen
       const cityCell = document.createElement("div");
       cityCell.classList.add("cell", "head_column");
       cityCell.innerText = `${city1.id}-${city1.name}`;
       row.appendChild(cityCell);
   
-      // Skapa övriga celler
       cities.forEach((city2, colIndex) => {
         const cell = document.createElement("div");
         cell.classList.add("cell", colIndex % 2 === 0 ? "even_col" : "odd_col");
         const distance = getDistance(city1.id, city2.id);
-        cell.innerText = distance || ""; // Visa tomt om det är diagonalen
+        cell.innerText = distance || "";
         row.appendChild(cell);
       });
   
@@ -186,7 +172,6 @@ window.onload = function() {
   }
   
   
-  // Kör funktionen för att skapa tabellen
   createTable();
   
   
