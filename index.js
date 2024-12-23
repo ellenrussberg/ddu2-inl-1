@@ -109,18 +109,6 @@ window.onload = function() {
       }
   }
   
-  function getDistance(city1, city2) {
-    if (city1 === city2) return "";
-    const pair = distances.find(
-      (d) =>
-        (d.city1 === city1 && d.city2 === city2) ||
-        (d.city1 === city2 && d.city2 === city1)
-    );
-    return pair ? (pair.distance / 10):"-"
-  }
-  
-  
-  
   
   function getDistance(city1, city2) {
     if (city1 === city2) return "";
