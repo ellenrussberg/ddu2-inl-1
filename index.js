@@ -70,8 +70,6 @@ window.onload = function() {
     };
   }
   
-  
-  
   function highlightCities(cityName, closest, furthest) {
     let cities = document.querySelectorAll('.cityBox');
   
@@ -108,7 +106,6 @@ window.onload = function() {
         furthestSpan.textContent = "Ingen data";
       }
   }
-  
   
   function getDistance(city1, city2) {
     if (city1 === city2) return "";
@@ -158,7 +155,6 @@ window.onload = function() {
       table.appendChild(row);
     });
   }
-  
   
   createTable();
   

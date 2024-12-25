@@ -6,7 +6,7 @@
 }
 
 body {
-  background-color: #4c7557;
+  background-color: #344f3b;
   margin: 20px;
 }
 
@@ -19,7 +19,7 @@ body {
 
 #cities .cityBox {
   padding: 3px 6px;
-  background-color: #578c66;
+  background-color: #96c0a1;
   border-radius: 5px;
 }
 
@@ -48,7 +48,7 @@ h2, h3, p {
   text-decoration: none;
   color: black;
   flex-basis: 200px;
-  background-color: #578c66;
+  background-color: #96c0a1;
   border-radius: 5px;
   text-align: center;
 }
@@ -58,7 +58,7 @@ main {
   min-width: 900px;
   max-width: 1300px;
   margin: auto;
-  background-color: #b1d1b8;
+  background-color: #cee2d3;
   border-radius: 20px;
   padding: 20px;
 }
@@ -93,5 +93,5 @@ main {
 }
 
 #myTable .even_col {
-  background-color: #61946f;
+  background-color: #96c0a1;
 }
