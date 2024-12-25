@@ -6,7 +6,7 @@
 }
 
 body {
-  background-color: #e4b9fa;
+  background-color: #4c7557;
   margin: 20px;
 }
 
@@ -19,14 +19,14 @@ body {
 
 #cities .cityBox {
   padding: 3px 6px;
-  background-color: #dfb0f6;
+  background-color: #578c66;
   border-radius: 5px;
 }
 
 #cities .target, #cities .closest, #cities .furthest { color: white }
 #cities .target { background-color: black; }
-#cities .closest { background-color: green;}
-#cities .furthest { background-color: blue; }
+#cities .closest { background-color: #624773;}
+#cities .furthest { background-color: #32524e; }
 
 h1 {
   text-align: center;
@@ -48,7 +48,7 @@ h2, h3, p {
   text-decoration: none;
   color: black;
   flex-basis: 200px;
-  background-color: #dfb0f6;
+  background-color: #578c66;
   border-radius: 5px;
   text-align: center;
 }
@@ -58,7 +58,7 @@ main {
   min-width: 900px;
   max-width: 1300px;
   margin: auto;
-  background-color: #eedcf7;
+  background-color: #b1d1b8;
   border-radius: 20px;
   padding: 20px;
 }
@@ -93,5 +93,5 @@ main {
 }
 
 #myTable .even_col {
-  background-color: #e6befa;
+  background-color: #61946f;
 }
